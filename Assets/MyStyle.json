@@ -1,0 +1,8 @@
+﻿{
+  "version": "1.*",
+  "elements": {
+    "water": {
+      "fillColor": "#FF000000"
+    }
+  }
+}

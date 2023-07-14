@@ -1,0 +1,340 @@
+﻿<Page
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Cafe_App"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Custom="using:Windows.UI.Xaml.Controls.Maps"
+    x:Class="Cafe_App.LocationPage"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" SizeChanged="Page_SizeChanged">
+
+    <Grid x:Name="MapGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="10*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Background -->
+        <Grid.Background>
+            <ImageBrush ImageSource="/Assets/textures/page_texture.jpg"
+                        Stretch="UniformToFill"/>
+        </Grid.Background>
+
+        <!-- Map -->
+        <Custom:MapControl 
+            x:Name="Map"
+            MapServiceToken="hdHmAJyjVoRm1anqGJjT~Yrj-0mCtGPfdKM73xNk2dg~AuQIdXTStAGRiNFNNWeNg3kJ2jbyuNcn80wKyHFGhSnvbGReAh3_ZFOdxsxEDQma"
+            Width="400"
+            Height="380"
+            Canvas.ZIndex="1"
+            VerticalAlignment="Top"
+            HorizontalAlignment="Center"
+            ZoomInteractionMode="GestureAndControl"
+            TiltInteractionMode="GestureAndControl"
+            Grid.ColumnSpan="7"
+            Grid.RowSpan="4"
+            Grid.Column="0" 
+            Grid.Row="1"
+            Style="Road"
+            MapProjection="Globe"
+            ZoomLevel="{Binding ElementName=zoomSlider,Path=Value, Mode=TwoWay}"
+            Heading="{Binding ElementName=headingSlider,Path=Value, Mode=TwoWay}"
+            DesiredPitch="{Binding ElementName=desiredPitchSlider,Path=Value, Mode=TwoWay}" 
+            Loaded="Map_Loaded"/>
+
+        <ScrollViewer x:Name="LeftMapControlsScrollViewer" 
+                      Grid.Row="5" 
+                      Grid.Column="0"  
+                      Grid.RowSpan="4" 
+                      Grid.ColumnSpan="7"
+                      ZoomMode="Enabled" 
+                      VerticalScrollBarVisibility="Visible"
+                      VerticalAlignment="Center"
+                      Background="#FFC9D8ED" 
+                      Opacity="1">
+
+            <StackPanel x:Name="LeftMapStackPanel">
+
+                <!--<StackPanel x:Name="OptionsStackPanel" Orientation="Horizontal">
+
+                    <StackPanel  x:Name="GeoStackPanel" Orientation="Vertical" Background="#FFAFC3DE" Opacity="0.5" 
+                                 PointerEntered="GeoStackPanel_PointerEntered"         
+                                 PointerExited="GeoStackPanel_PointerExited" Margin="2,2,2,2" >
+                        <StackPanel Orientation="Horizontal" x:Name="LatitudeInputStackPanel">
+                            <TextBlock x:Name="TextBolckLatitude" Text="Latitude" Margin="5,2,5,2" Width="75" />
+                            <TextBox x:Name="TextBoxLatitude"  Margin="5,1,5,2" Text="-37.714440" Width="158"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" x:Name="LongitudeInputStackPanel">
+                            <TextBlock x:Name="TextBolckLongitude" Text="Longitude" Margin="5,2,5,2" Width="75"/>
+                            <TextBox x:Name="TextBoxLongitude"  Margin="5,2,5,2" Text="176.331600" Width="158"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" x:Name="LocationButtonStackPanel">
+                            <Button x:Name="ButtonLocation" Content="Go to Location" Tapped="ButtonLocation_Tapped" 
+                         Margin="2,4,3,5" Width="120"/>
+                            <Button x:Name="ButtonClearLocation" Content="Clear Location" Tapped="ButtonClearLocation_Tapped" 
+                        Margin="2,4,5,5" Width="120"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel x:Name="StyleProjectionStackPanel" Orientation="Vertical" Background="#FFAFC3DE" 
+                       Margin="1,1,1,2" Opacity="0.5" PointerEntered="StyleProjectionStackPanel_PointerEntered" 
+                       PointerExited="StyleProjectionStackPanel_PointerExited">
+                        <ComboBox Header="Styles" Name="styleCombobox" SelectionChanged="styleCombobox_SelectionChanged" 
+                        Margin="5,1,5,0" Width="185">
+                            <ComboBoxItem IsSelected="True">Select an option</ComboBoxItem>
+                            <ComboBoxItem>None</ComboBoxItem>
+                            <ComboBoxItem>Road</ComboBoxItem>
+                            <ComboBoxItem>Aerial</ComboBoxItem>
+                            <ComboBoxItem>Aerial With Roads</ComboBoxItem>
+                            <ComboBoxItem>Terrain</ComboBoxItem>
+                            <ComboBoxItem>Aerial 3D</ComboBoxItem>
+                            <ComboBoxItem>Aerial 3D With Roads</ComboBoxItem>
+                        </ComboBox>
+
+                        <ComboBox Header="Projection" Name="projectionCombobox" 
+                        SelectionChanged="projectionCombobox_SelectionChanged" Margin="5,0,5,5" Width="185">
+                            <ComboBoxItem IsSelected="True">Select an option</ComboBoxItem>
+                            <ComboBoxItem>Web Mercator</ComboBoxItem>
+                            <ComboBoxItem>Globe</ComboBoxItem>
+                        </ComboBox>
+                    </StackPanel>
+                </StackPanel>-->
+
+                <!--<StackPanel x:Name="CustomStackPanel" Orientation="Horizontal"  Background="#FFAFC3DE" Margin="2,1,7,2" 
+                     Opacity="0.5" PointerEntered="CustomStackPanel_PointerEntered" 
+                     PointerExited="CustomStackPanel_PointerExited" >
+                    <ComboBox Header="Style Sheets" Name="stylesheetCombobox" Margin="5,1,5,5" 
+                      SelectionChanged="stylesheetCombobox_SelectionChanged" Width="185">
+                        <ComboBoxItem IsSelected="True">Select an option</ComboBoxItem>
+                        <ComboBoxItem>Aerial</ComboBoxItem>
+                        <ComboBoxItem>Aerial With Overlay</ComboBoxItem>
+                        <ComboBoxItem>Road Dark</ComboBoxItem>
+                        <ComboBoxItem>Road High Contrast Dark</ComboBoxItem>
+                        <ComboBoxItem>Road High Contrast Light</ComboBoxItem>
+                        <ComboBoxItem>Road Light</ComboBoxItem>
+                        <ComboBoxItem>Combine custom file</ComboBoxItem>
+                        <ComboBoxItem>Combine custom string</ComboBoxItem>
+                    </ComboBox>
+
+                    <CheckBox Content="Traffic flow visible on roads" x:Name="trafficFlowVisibleCheckBox" 
+                      Checked="TrafficFlowVisible_Checked" Unchecked="trafficFlowVisibleCheckBox_Unchecked" 
+                      Margin="20,1,0,5" />
+                </StackPanel>-->
+
+                <!--<StackPanel x:Name="DataInputStackPanel" Orientation="Vertical" Background="#FFAFC3DE" Margin="2,1,7,2" 
+                     Opacity="0.5" PointerEntered="DataInputStackPanel_PointerEntered" 
+                     PointerExited="DataInputStackPanel_PointerExited" >-->
+
+                    <!--<StackPanel x:Name="EnableStackPanel" Orientation="Horizontal" >
+                        <Button x:Name="ButtonReturnAddress" Content="Return Address" Margin="5,2,1,2" Width="140" 
+                       Click="ButtonReturnAddress_Click" />
+                        <TextBlock x:Name="TextBolckAddress" Margin="5,8,0,2" FontSize="14" />
+                    </StackPanel>
+                    <TextBlock x:Name="TextBolckFullDetails" Margin="10,1,0,2" Text="Full address details:" 
+                       FontStyle="Italic" />
+                    <StackPanel x:Name="StreetStackPanel" Orientation="Horizontal" >
+                        <TextBlock x:Name="TextBolckNumber" Margin="10,1,0,2" />
+                        <TextBlock x:Name="TextBolckStreet" Margin="5,1,0,2" />
+                        <TextBlock x:Name="TextBolckTown" Margin="5,1,0,2" />
+                    </StackPanel>
+                    <StackPanel x:Name="RegionStackPanel" Orientation="Horizontal" >
+                        <TextBlock x:Name="TextBolckDistrict" Margin="10,1,0,2" />
+                        <TextBlock x:Name="TextBolckCode" Margin="5,1,0,2" />
+                        <TextBlock x:Name="TextBolckCountry" Margin="5,1,0,2" />
+                    </StackPanel>
+                </StackPanel>-->
+
+
+                <StackPanel x:Name="AddressInputStackPanel" Orientation="Vertical" Background="#FFAFC3DE" Margin="2,1,7,2" 
+                     Opacity="0.5" PointerEntered="AddressInputStackPanel_PointerEntered" 
+                     PointerExited="AddressInputStackPanel_PointerExited" >
+
+                    <StackPanel x:Name="FindLocationStackPanel" Orientation="Horizontal" >
+                        <Button x:Name="ButtonFinfAddress" Content="Find" Margin="5,7,1,5" Width="64" 
+                       Click="ButtonFinfAddress_Click"/>
+                        <TextBlock x:Name="TextBolckAddressToFind" Margin="3,0,0,0" FontSize="14" Text="Address" 
+                          VerticalAlignment="Center"/>
+                        <TextBox x:Name="TextBoxInputAddress"  Margin="4,5,5,1" Text="15 Palm Springs Boulevard, Papamoa, New Zealand" Width="310"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel x:Name="LocationListStackPanel" Orientation="Horizontal" Background="#FFAFC3DE" 
+                        Margin="2,2,1,2" Opacity="0.5" PointerEntered="LocationListStackPanel_PointerEntered" 
+                        PointerExited="LocationListStackPanel_PointerExited"  >
+                    <Button x:Name="ButtonStreetView" Content="Street View" Margin="4,4,1,5" Width="130" 
+                      Tapped="ButtonStreetView_Tapped" />
+
+                    <!--<ComboBox Name="locationCombobox"  VerticalAlignment="Center" Margin="5,0,5,0" 
+                        SelectionChanged="locationCombobox_SelectionChanged" Width="185">
+                        <ComboBoxItem IsSelected="True">Please select a location</ComboBoxItem>
+                        <ComboBoxItem>Paris</ComboBoxItem>
+                        <ComboBoxItem>Venice</ComboBoxItem>
+                        <ComboBoxItem>San Francisco</ComboBoxItem>
+                        <ComboBoxItem>Florence</ComboBoxItem>
+                        <ComboBoxItem>London</ComboBoxItem>
+                        <ComboBoxItem>Mount Maunganui</ComboBoxItem>
+                        <ComboBoxItem>New York</ComboBoxItem>
+                        <ComboBoxItem>Windermere</ComboBoxItem>
+                        <ComboBoxItem>Microsoft</ComboBoxItem>
+                        <ComboBoxItem>Machu Pichu</ComboBoxItem>
+                        <ComboBoxItem>Milford Sound</ComboBoxItem>
+                        <ComboBoxItem>UFO</ComboBoxItem>
+                        <ComboBoxItem>Prismatic Spring</ComboBoxItem>
+                        <ComboBoxItem>Eye of Africa</ComboBoxItem>
+                        <ComboBoxItem>Black Canyon</ComboBoxItem>
+                        <ComboBoxItem>Canyonlands</ComboBoxItem>
+                        <ComboBoxItem>Capitol Reef</ComboBoxItem>
+                        <ComboBoxItem>Crater Lake</ComboBoxItem>
+                        <ComboBoxItem>Grand Canyon</ComboBoxItem>
+                    </ComboBox>-->
+                </StackPanel>
+
+                <!--<StackPanel x:Name="LocationListStackPanel2" Orientation="Horizontal" Background="#FFAFC3DE" 
+                        Margin="2,2,1,2" Opacity="0.5" PointerEntered="LocationListStackPanel2_PointerEntered" 
+                        PointerExited="LocationListStackPanel2_PointerExited"  >
+
+                    <Slider Minimum="1" Maximum="20" Header="Zoom Level" Name="zoomSlider" Value="20" Margin="5,0,5,3" 
+                    Width="130" ValueChanged="zoomSlider_ValueChanged" />
+                    <Slider Minimum="0" Maximum="360" Header="Heading" Name="headingSlider" Value="0" Margin="5,0,5,3" 
+                    Width="130" ValueChanged="headingSlider_ValueChanged" />
+                    <Slider Minimum="0" Maximum="69" Header=" Desired Pitch" Name="desiredPitchSlider" Value="0" 
+                    Margin="5,0,5,3" Width="130" ValueChanged="desiredPitchSlider_ValueChanged" />
+                </StackPanel>-->
+
+                <StackPanel x:Name="PinStackPanel" Orientation="Vertical" Background="#FFAFC3DE" Margin="1,1,1,2" 
+                     Opacity="0.5" PointerEntered="PinStackPanel_PointerEntered" 
+                     PointerExited="PinStackPanel_PointerExited" >
+
+                    <StackPanel x:Name="BasicPinStackPanel" Orientation="Horizontal" Margin="0,5,0,5">
+                        <Button Content="Add MapIcon" Margin="11,0,10,0" Width="120">
+                            <Button.Flyout>
+                                <Flyout x:Name="PinFlyout">
+                                    <StackPanel Margin="10,10,10,10" Orientation="Vertical">
+                                        <TextBlock Text="Select an icon and enter a loction." Margin="0,10,0,10" 
+                                      HorizontalAlignment="Center"/>
+                                        <StackPanel  Orientation="Horizontal">
+                                            <Image x:Name="Icon1" Source="Assets/MapPin1.png" Margin="5,0,5,0" 
+                                     HorizontalAlignment="Left" Width="30" Height="45" Stretch="Fill" Opacity="0.2" 
+                                     Tapped="Icon1_Tapped" />
+                                            <Image x:Name="Icon2" Source="Assets/MapPin2.png" Margin="5,0,5,0" 
+                                     HorizontalAlignment="Left" Width="30" Height="45" Stretch="Fill" Opacity="0.2" 
+                                     Tapped="Icon2_Tapped" />
+                                            <Image x:Name="Icon3" Source="Assets/MapPin3.png" Margin="5,0,5,0" 
+                                     HorizontalAlignment="Left" Width="30" Height="45" Stretch="Fill" Opacity="0.2" 
+                                     Tapped="Icon3_Tapped" />
+                                        </StackPanel>
+                                        <TextBox x:Name="LocationData" Text="My Location" Margin="5,10,5,10" />
+                                        <Button Name="InnerFlyoutButton" Margin="5,10,5,10" HorizontalAlignment="Center" 
+                                   Content="OK" Click="InnerFlyoutButton_Click" />
+                                    </StackPanel>
+                                </Flyout>
+                            </Button.Flyout>
+                        </Button>
+                        <Button x:Name="mapBillboardAddButton" Content="Add Billboard" Click="mapBillboardAddButton_Click"  
+                       Margin="11,0,10,0" Width="120"/>
+                        <Button x:Name="ClearMapButton" Content="Clear Push Pins" Margin="5,0,10,0" Width="120" 
+                       Click="ClearMapButton_Click"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel x:Name="ComplexStackPanel" Orientation="Vertical" Background="#FFAFC3DE" Margin="1,1,1,2" 
+                     Opacity="0.5" PointerEntered="ComplexStackPanel_PointerEntered" 
+                     PointerExited="ComplexStackPanel_PointerExited"  >
+
+                    <StackPanel x:Name="ExtendingBasicPinStackPanel" Orientation="Horizontal" Margin="0,5,0,5">
+
+                        <Button x:Name="FindRouteButton" Content="Add Route"  Margin="11,0,5,0" Width="150" 
+                       Click="FindRouteButton_Click"/>
+                        <ScrollViewer x:Name="FindRouteScrollViewer"  ZoomMode="Enabled" 
+                             HorizontalScrollBarVisibility="Visible" Margin="0,0,0,0" Background="#FFC9D8ED" 
+                             Opacity="1" Width="270" Height="50" VerticalScrollMode="Enabled" 
+                             HorizontalScrollMode="Enabled" PointerEntered="FindRouteScrollViewer_PointerEntered" 
+                             PointerExited="FindRouteScrollViewer_PointerExited">
+                            <TextBlock x:Name="FindRouteTextBlock" Margin="5,2,0,0" IsTextSelectionEnabled="True" 
+                             Text="Route Information"/>
+                        </ScrollViewer>
+                    </StackPanel>
+                    <MediaElement Name="media" Visibility="Collapsed"/>
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- MainPage Button -->
+        <Button x:Name="GotoMainPageButton"
+                Grid.Column="7" 
+                Grid.Row="0" 
+                VerticalAlignment="Center" 
+                HorizontalAlignment="Center"
+                Width="60" 
+                Height="60"
+                Canvas.ZIndex="2" 
+                Click="GotoMainPageButton_Click">
+            <Button.Background>
+                <ImageBrush ImageSource="Assets/button/button_1.png"/>
+            </Button.Background>
+        </Button>
+        <Image x:Name="Home" 
+               Source="Assets/button/button_1.png"
+               Height="60" 
+               Width="60"
+               VerticalAlignment="Center" 
+               HorizontalAlignment="Center" 
+               Grid.Row="0"
+               Grid.Column="7"
+               Canvas.ZIndex="1"/>
+
+        <!-- Header -->
+        <Image x:Name="Header" 
+               Source="Assets/header/h1_bg.png"
+               Height="92" 
+               Width="448"
+               VerticalAlignment="Top" 
+               HorizontalAlignment="Center" 
+               Grid.Row="0"
+               Grid.Column="0"
+               Grid.ColumnSpan="7" 
+               Grid.RowSpan="1"/>
+
+        <!-- Logo -->
+        <Image x:Name="Logo" 
+               Source="Assets/logo/h2_logo.jpg"
+               Height="70" 
+               Width="70"
+               VerticalAlignment="Center" 
+               HorizontalAlignment="Center" 
+               Grid.Row="0"
+               Grid.Column="0"
+               Grid.ColumnSpan="1" 
+               Grid.RowSpan="1"/>
+
+        <!-- TextBlock -->
+        <TextBlock x:Name="Title"
+                   Text="Shop Location" 
+                   FontFamily="Yu Gothic Medium" 
+                   FontSize="28" 
+                   Grid.Column="0" 
+                   Grid.Row="0" 
+                   Grid.ColumnSpan="7"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   Width="175" 
+                   Height="32" 
+                   Foreground="Black"/>
+    </Grid>
+</Page>
